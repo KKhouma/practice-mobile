@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ui1/pages/medicine.dart';
+import 'freemed.dart';
 
 class MainMenuPages extends StatefulWidget {
   const MainMenuPages({ Key? key }) : super(key: key);
@@ -48,7 +49,7 @@ class _MainMenuPagesState extends State<MainMenuPages> {
                     setState(() {
                       colour = Colors.lightGreen;
                     });
-                    Navigator.push(context, MaterialPageRoute(builder: (_) => DetailMedicinePage(titlePage: "Obat-obatan Herbal")));
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => DetailMedicinePage(titlePage: "Herbal",theme: theme)));
                   },
                   
                  child:Container(
@@ -69,6 +70,7 @@ class _MainMenuPagesState extends State<MainMenuPages> {
                               'Obat-obatan Herbal',
                               textAlign: TextAlign.right,
                               style: TextStyle(
+                              
                                 color: theme == true? Colors.white : Colors.black,
                               ),
 
@@ -81,8 +83,16 @@ class _MainMenuPagesState extends State<MainMenuPages> {
                 ),
                 ),
                 SizedBox(height: 30,),
-                Container(
-                  width: double.infinity,
+                InkWell(
+                  onTap: (){
+                    setState(() {
+                      colour = Colors.lightGreen;
+                    });
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => FreeMedicinePage(titlePage: "Obat-obatan Bebas",theme: theme)));
+                  },
+
+                  child: Container(
+                     width: double.infinity,
                   height: 100,
                   color: Colors.green,
                   child: Padding(
@@ -107,6 +117,7 @@ class _MainMenuPagesState extends State<MainMenuPages> {
                         )
                       ],
                     ),
+                  ),
                   ),
                 ),
                 SizedBox(height: 30,),
