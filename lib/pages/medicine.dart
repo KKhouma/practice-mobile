@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:ui1/pages/main_menu.dart';
 
 class DetailMedicinePage extends StatelessWidget {
-  DetailMedicinePage({ Key? key,required this.titlePage ,required this.theme, Key }) : super(key: key);
+  DetailMedicinePage({ Key? key,required this.titlePage , Key }) : super(key: key);
   String titlePage;
-  final bool theme;
   
   @override
   Widget build(BuildContext context) {
@@ -12,11 +11,11 @@ class DetailMedicinePage extends StatelessWidget {
       appBar: AppBar(
         title:Text(titlePage,
         style: TextStyle(
-          color: theme == true? Colors.white : Colors.black
+          color:Colors.white
         ),),
         centerTitle:true ,
       ),
-      backgroundColor: theme == false? Colors.blue.shade600 : Colors.white,
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

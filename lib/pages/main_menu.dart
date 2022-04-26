@@ -1,41 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ui1/pages/medicine.dart';
 import 'freemed.dart';
+import 'package:ui1/login.dart';
 
-class MainMenuPages extends StatefulWidget {
-  const MainMenuPages({ Key? key }) : super(key: key);
 
-  @override
-  State<MainMenuPages> createState() => _MainMenuPagesState();
-}
 
-class _MainMenuPagesState extends State<MainMenuPages> {
+class MainMenuPages extends StatelessWidget {
+  final String nama;
 
-   Color colour = Colors.green;
-  final int _counter = 0;
-  bool theme = false;
-  getCounter(){
-    return _counter;
-  }
-
-  void _incrementCounter(){
-    setState(() {
-      theme = !theme;
-    });
-  }
+  MainMenuPages({required this.nama});
 
   @override
   Widget build(BuildContext context) {
-    
-    return
+       return
       Scaffold(
+        floatingActionButton: FloatingActionButton(
+          heroTag: Icons.logout,
+          onPressed: () async{
+          SharedPreferences storeLocal = await SharedPreferences.getInstance();
+          storeLocal.clear();
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+            return LoginScreen();
+          }),
+          );
+        }),
+        floatingActionButtonLocation: FloatingActionButtonLocation.miniEndTop,
         appBar: AppBar(
-          title:  Text('Wiki Medicine',
-          style: TextStyle(
-            color: theme == true? Colors.white : Colors.black),),
+          title: Text('Halo !!! '+nama),
         ),
         backgroundColor:
-        theme == false? Colors.blue.shade600 : Colors.white,
+         Colors.white,
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -46,16 +41,13 @@ class _MainMenuPagesState extends State<MainMenuPages> {
                 ),
                 InkWell(
                   onTap: (){
-                    setState(() {
-                      colour = Colors.lightGreen;
-                    });
-                    Navigator.push(context, MaterialPageRoute(builder: (_) => DetailMedicinePage(titlePage: "Herbal",theme: theme)));
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => DetailMedicinePage(titlePage: "Herbal")));
                   },
                   
                  child:Container(
                   width: double.infinity,
                   height: 100,
-                  color: colour,
+                 color: Colors.green,
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                     child: Row(
@@ -71,7 +63,7 @@ class _MainMenuPagesState extends State<MainMenuPages> {
                               textAlign: TextAlign.right,
                               style: TextStyle(
                               
-                                color: theme == true? Colors.white : Colors.black,
+                                color: Colors.white
                               ),
 
                             ),
@@ -85,10 +77,7 @@ class _MainMenuPagesState extends State<MainMenuPages> {
                 SizedBox(height: 30,),
                 InkWell(
                   onTap: (){
-                    setState(() {
-                      colour = Colors.lightGreen;
-                    });
-                    Navigator.push(context, MaterialPageRoute(builder: (_) => FreeMedicinePage(titlePage: "Obat-obatan Bebas",theme: theme)));
+                    Navigator.push(context, MaterialPageRoute(builder: (_) => FreeMedicinePage(titlePage: "Obat-obatan Bebas")));
                   },
 
                   child: Container(
@@ -109,7 +98,7 @@ class _MainMenuPagesState extends State<MainMenuPages> {
                               'Obat-obatan Bebas',
                               textAlign: TextAlign.right,
                               style: TextStyle(
-                                color: theme == true? Colors.white : Colors.black,
+                                color: Colors.white
                               ),
 
                             ),
@@ -139,7 +128,7 @@ class _MainMenuPagesState extends State<MainMenuPages> {
                               'Obat-obatan Terbatas',
                               textAlign: TextAlign.right,
                               style: TextStyle(
-                                color: theme == true? Colors.white : Colors.black,
+                                color: Colors.white
                               ),
 
                             ),
@@ -168,7 +157,7 @@ class _MainMenuPagesState extends State<MainMenuPages> {
                               'Obat-obatan Narkotika',
                               textAlign: TextAlign.right,
                               style: TextStyle(
-                                color: theme == true? Colors.white : Colors.black,
+                                color: Colors.white
                               ),
 
                             ),
@@ -182,16 +171,12 @@ class _MainMenuPagesState extends State<MainMenuPages> {
             ),
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: theme == true? Colors.blue : Colors.white,
-          onPressed: _incrementCounter,
-          child: Icon(
-            theme == false? Icons.sunny : Icons.dark_mode_outlined,
-            color : Colors.black,
-          )
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.miniEndTop,
       );
     
   }
+  
+     
+
+ 
 }
+
