@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ui1/login.dart';
 import 'package:ui1/pages/main_menu.dart';
 import 'login.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences storeLocal = await SharedPreferences.getInstance();
-  var _isLogin = storeLocal.getBool("isLogin");
-  var _nama = storeLocal.getString("nama");
+  await  Firebase.initializeApp();
+  
   runApp(MaterialApp(
-    home: _isLogin == false || _isLogin == null || _nama == null
-        ? LoginScreen()
-        : MainMenuPages(
-            nama: _nama.toString(),
-          ),
+   home: LoginScreen()
   ));
 }
 // void main() {

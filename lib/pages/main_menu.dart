@@ -1,5 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ui1/pages/medicine.dart';
 import 'freemed.dart';
 import 'package:ui1/login.dart';
@@ -7,27 +7,25 @@ import 'package:ui1/login.dart';
 
 
 class MainMenuPages extends StatelessWidget {
-  final String nama;
+  
 
-  MainMenuPages({required this.nama});
+  
 
   @override
   Widget build(BuildContext context) {
        return
       Scaffold(
         floatingActionButton: FloatingActionButton(
-          heroTag: Icons.logout,
+          child: const Icon(Icons.logout),
           onPressed: () async{
-          SharedPreferences storeLocal = await SharedPreferences.getInstance();
-          storeLocal.clear();
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
-            return LoginScreen();
-          }),
-          );
+          FirebaseAuth.instance.signOut().then((value){
+            print("log out");
+            Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+          });
         }),
-        floatingActionButtonLocation: FloatingActionButtonLocation.miniEndTop,
+        floatingActionButtonLocation: FloatingActionButtonLocation.miniStartTop,
         appBar: AppBar(
-          title: Text('Halo !!! '+nama),
+          
         ),
         backgroundColor:
          Colors.white,

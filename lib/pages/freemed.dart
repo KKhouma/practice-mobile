@@ -11,11 +11,11 @@ class FreeMedicinePage extends StatelessWidget {
       appBar: AppBar(
         title:Text(titlePage,
         style: TextStyle(
-          color: Colors.white
+          color: Colors.black
         ),),
         centerTitle:true ,
       ),
-      backgroundColor: Colors.blue.shade600,
+      backgroundColor: Colors.white,
       body: _PageList(),
     );
   }
